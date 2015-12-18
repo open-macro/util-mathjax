@@ -1,2 +1,7 @@
 # util-mathjax
-preprocess latex
+
+Utility for preprocessing LaTeX
+
+## Install
+
+	npm install mathjax-node
