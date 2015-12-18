@@ -1,15 +1,30 @@
 $(function() {
 
 	$("#btn-submit").click(function() {
-		//var tex_eqn = $('#tex-eqn').val();
+		var pdata = {
+		    "format": "TeX",
+		    "math": $('#tex-eqn').val(),
+	    	"svg":true,
+	    	"mml":false,
+	    	"png":false,
+	    	"speakText": true,
+	    	"speakRuleset": "mathspeak",
+	    	"speakStyle": "default",
+	    	"ex": 6,
+	    	"width": 1000000,
+	    	"linebreaks": false,
+	    };
+	    var datastring = JSON.stringify(pdata);
+		
 		$.ajax({
 			url: "/submit",
 			type: "POST",
-			data: JSON.stringify({ tex: $('#tex-eqn').val() }),
+			data: datastring,
 			contentType: "application/json",
 			success: function() {},
-			failure: function() { 
-		    	alert('error while writing parameters'); }
+			failure: function() { alert('error'); }
+	    	}).done(function() {
+	    		$("#svg-holder").attr("src", "svg/foo.svg");
 	    	});
 	});
 
