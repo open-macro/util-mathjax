@@ -1,0 +1,23 @@
+{
+  "name": "util-mathjax",
+  "version": "0.0.0",
+  "description": "util for preprocessing latex",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/open-macro/util-mathjax.git"
+  },
+  "author": "Will Clark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/open-macro/util-mathjax/issues"
+  },
+  "dependencies": {
+    "body-parser": "~1.14.2",
+    "express": "~4.13.3",
+    "mathjax-node": "^0.4.0"
+  }
+}
