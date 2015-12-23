@@ -23,8 +23,9 @@ $(function() {
 			contentType: "application/json",
 			success: function() {},
 			failure: function() { alert('error'); }
-	    	}).done(function() {
-	    		$("#svg-holder").attr("src", "svg/foo.svg");
+	    	}).done(function(data) {
+	    		//alert(data.fname);
+          $("#svg-holder").attr("src", "svg/" + data.fname + ".svg");
 	    	});
 	});
 
