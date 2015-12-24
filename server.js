@@ -26,11 +26,14 @@ app.post('/submit', function(req, res) {
     if (!data.errors) {
       fs.writeFile("./public/svg/" + fname + ".svg", data.svg, function(err) {
         if(err) { return console.log(err); }
-        console.log('File saved')
+        console.log('File saved to: ' + fname);
+        res.json(
+          {"idx": req.body.idx,
+          "fname": fname}
+        );
       });
     }
   });
-  res.json({"fname": fname});
 });
 
 var server = app.listen(3000, function () {
