@@ -17,6 +17,7 @@ $(function() {
 	};
 
 	var num_boxes = 0;
+	var svg_names = [];
 	num_boxes = add_rows(5, num_boxes);
 
 	$("#btn-add5").click(function() {
@@ -24,27 +25,43 @@ $(function() {
 	})
 
 	$("#btn-submit").click(function() {
-		// alert(num_boxes);
 		for (var i = 0; i < num_boxes; i++) {
-			// alert($("#tex"+i).val());
-			$.ajax({
-				url: "/submit",
-				type: "POST",
-				data: JSON.stringify(
-					{"math": $("#tex"+i).val(),
-					"idx": i}
-					),
-				contentType: "application/json",
-				success: function() {},
-				failure: function() { alert('error'); }
-			}).done(function(data) {
-				$("#svg"+data.idx).attr("src", "svg/" + data.fname + ".svg");
-			});
+			if ($("#tex"+i).val() != "") {
+				$.ajax({
+					url: "/submit",
+					type: "POST",
+					data: JSON.stringify(
+						{"math": $("#tex"+i).val(),
+						"idx": i}
+						),
+					contentType: "application/json",
+					success: function() {},
+					failure: function() { alert('error'); }
+				}).done(function(data) {
+					svg_names[data.idx] = data.fname;
+					$("#svg"+data.idx).attr("src", "svg/" + data.fname + ".svg");
+					// alert(svg_names);
+					$.ajax({
+						url: "/zip",
+						type: "POST",
+						data: JSON.stringify(
+							{ "svg_names": svg_names }
+							),
+						contentType: "application/json",
+						success: function() {},
+						failure: function() {}
+					}).done(function(data) {
+						$("#btn-download").removeClass("disabled");
+						/* Note: this doesn't actually add or remove functionality,
+						it just changes the display class */
+					});
+				});
+			}
 		}
 	});
 
 	$("#btn-download").click(function() {
-		alert("download")
+		// alert('download');
 	})
 
 
