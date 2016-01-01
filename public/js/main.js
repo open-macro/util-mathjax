@@ -3,7 +3,8 @@ $(function() {
 	function add_rows(n_rows, num_boxes) {
 		for(var i = num_boxes; i < n_rows+num_boxes; i++) {
 			var input_img = "<div class='row input-img'>" +
-		    "<div class='col-md-6'>" + 
+			"<div class='col-md-1 text-center'>" + i + "</div>" + 
+		    "<div class='col-md-5'>" + 
 		    "<input type='text' class='form-control' id='tex" + i + "' placeholder='y_t = a_t k_t^{\alpha} n_t^{1-\alpha}'>" + 
 	        "</div>" +
         	"<div class='col-md-6'>" +

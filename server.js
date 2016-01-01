@@ -32,6 +32,9 @@ app.post('/submit', function(req, res) {
     math: req.body.math,
     format: "TeX",
     svg: true,
+    ex: 6,
+    width: 80,
+    linebreaks: true
   }, function (data) {
     if (!data.errors) {
       fs.writeFile("./public/svg/" + fname + ".svg", data.svg, function(err) {
