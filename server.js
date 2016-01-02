@@ -18,8 +18,9 @@ app.get('/', function (req, res) {
 app.post('/zip', function(req, res) {
 	rm = spawn('rm', ['-f', './public/myfiles.zip']);
 	for (var i=0; i<req.body.svg_names.length; i++) {
+		console.log('processing equation' + i);
 		old_file = './public/svg/' + req.body.svg_names[i] + '.svg'
-		new_file = './public/svg/eqn' + pad(i,3) + '.svg'
+		new_file = './public/svg/' + req.body.saveas_names[i] + '.svg' //'./public/svg/eqn' + pad(i,3) + '.svg'
 		archive = './public/myfiles.zip';		
 		copyAndZip(old_file, new_file, archive);
 	}
@@ -63,26 +64,26 @@ function pad(num, size) {
 function zipme(new_file, archive) {
 	zip = spawn('zip', ['-j', archive, new_file]); 
 	zip.stdout.on('data', function (data) {
-		console.log('stdout [zip]: ' + data);
+		// console.log('stdout [zip]: ' + data);
 	});
 	zip.stderr.on('data', function (data) {
 		console.log('stderr [zip]: ' + data);
 	});
 	zip.on('close', function (code) {
-		console.log('child process [zip] exited with code ' + code);
+		// console.log('child process [zip] exited with code ' + code);
 	});
 }
 
 function copyAndZip(old_file, new_file, archive) {
 	cp = spawn('cp', [old_file, new_file]);
 	cp.stdout.on('data', function(data) {
-		console.log('stdout [cp]: ' + data);
+		// console.log('stdout [cp]: ' + data);
 	});
 	cp.stderr.on('data', function(data) {
 		console.log('stderr [cp]: ' + data);
 	});
 	cp.on('close', function(code) {
-		console.log('child process [cp] exited with code ' + code);
+		// console.log('child process [cp] exited with code ' + code);
 		zipme(new_file, archive);
 	});
 }
